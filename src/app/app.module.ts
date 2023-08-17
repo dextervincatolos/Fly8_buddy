@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { OtherInfoComponent } from './other-info/other-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchFlightComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    OtherInfoComponent
   ],
   imports: [
     BrowserModule,
