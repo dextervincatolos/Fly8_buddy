@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-flight.component.css']
 })
 export class SearchFlightComponent {
-
+ 
 }

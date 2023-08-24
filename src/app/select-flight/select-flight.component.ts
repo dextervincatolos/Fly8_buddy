@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { airlineIdentification } from '../data';
 
 @Component({
   selector: 'app-select-flight',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./select-flight.component.css']
 })
 export class SelectFlightComponent {
-
+  airlines = airlineIdentification;
 }
