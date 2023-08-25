@@ -1,105 +1,95 @@
 <section>
-    <div class="alert alert-success" role="alert" style="display: flex;">
-        <div class="container"><h3>Search Flight:</h3></div><h3><i class="bi bi-x-lg"></i></h3>
-    </div>
-    <div class="container">
-        <h2 class="my-5">Hi, where would you like to go?</h2>
-        <div class="col-md-12 mt-5">
+  <div class="alert alert-success" role="alert" style="display: flex;">
+    <div class="container"><h3>Search Flight:</h3></div><h3><i class="bi bi-x-lg" (click)="navigateToHome()"></i></h3>
+  </div>
+  <div class="container">
+    <h2 class="my-5">Hi, where would you like to go?</h2>
+    <div class="col-md-12 mt-5">
            
-              <div class="row">
-                <div class="col-md-6 row">
-                    <div class="col-md-6 my-2">
-                        <span class="text-success">
-                            <i class="bi bi-airplane"></i>
-                            Flight:
-                          </span>
-                    </div>
-                    <div class="col-md-6 my-2">
-                        <div class="dropdown">
-                            <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              One-way
-                            </a>
-                          
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">One-way</a></li>
-                              <li><a class="dropdown-item" href="#">Round-trip</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row mt-2" >
-                        <div class="col-md-6">
-                            <label for="">From:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="">To:</label>
-                        </div>
-                    </div>
-                  <div class="input-group">
-                    <select name="" id="" class="form-control">
-                      <option value="">Flying From:</option>
-                    </select>
-                    <select name="" id="" class="form-control">
-                      <option value="">Flying To:</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 mt-5">
+      <form class="row" [formGroup]="displayedFlightForm" (ngSubmit)="onFormSubmit()">
+        <div class="col-md-6 row">
+          <div class="col-md-6 my-2">
+            <span class="text-success">
+              <i class="bi bi-airplane"></i>
+              Flight:
+            </span>
+          </div>
+          <div class="col-md-6 my-2">
+            <div class="dropdown">
+              <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ displayedFlightForm?.get('flightType')?.value }}</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="javascript:void(0);" (click)="setFlightType('One-way')">One-way</a></li>
+                <li><a class="dropdown-item" href="javascript:void(0);" (click)="setFlightType('Round-trip')">Round-trip</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="row mt-2" >
+            <div class="col-md-6">
+              <label for="">From:</label>
+            </div>
+            <div class="col-md-6">
+              <label for="">To:</label>
+            </div>
+          </div>
+          <div class="input-group">
+            <select class="form-control" formControlName="flyingFrom">
+              <option value="">Flying From:</option>
+              <option *ngFor="let destination of destinations" [value]="destination.cityID">{{ destination.city_code }}</option>
+            </select>
+            <select id="" class="form-control" formControlName="flyingTo">
+              <option value="">Flying To:</option>
+              <option *ngFor="let destination of destinations" [value]="destination.cityID">{{ destination.city_code }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 mt-5">
                  
-                    <div class="input-group mt-3">
-                        <div class="col-md-5 mx-3">
-                            <label for="">Departure:</label>
-                            <input type="date" aria-label="First name" class="form-control" placeholder="Select origin">
-                        </div>
-                        <div class="col-md-5 mx-3">
-                            <label for="">Return:</label>
-                            <input type="date" aria-label="Last name" class="form-control" placeholder="Select Destination">
-                        </div>
-                       
-                       
-                    </div>
-          
-                </div>
-                <div class="col-md-6 row mt-2">
-                  
-                    <div class="row mt-2" >
-                        <div class="col-md-6">
-                            <label for="">Adults <i> (18+) </i>:</label>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="">Children <i> (0-17) </i>:</label>
-                        </div>
-                    </div>
-                  <div class="input-group">
-                    <select name="" id="" class="form-control">
-                      <option value="">Adult(s)</option>
-                    </select>
-                    <select name="" id="" class="form-control">
-                      <option value="">Children</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6 mt-2">
-                 
-                    <div class="input-group mt-3">
-                        <div class="col-md-12 mx-3">
-                            <label for="">Travel Class:</label>
-                            <input type="text" aria-label="First name" class="form-control" placeholder="Travel Class">
-                        </div>
-                       
-                       
-                       
-                    </div>
-          
-                </div>
-                
-                <div class="col-md-12">
-                  <button class="btn btn-primary btn-md form-control mt-5" > Search Flight</button>
-                </div>
-              </div>
-              
+          <div class="input-group mt-3">
+            <div class="col-md-5 mx-3">
+              <label for="">Departure:</label>
+              <input type="date" class="form-control" placeholder="Select origin" formControlName="departureDate">
+            </div>
             
-          
+            <div class="col-md-5 mx-3">
+              <label for="">Return:</label>
+              <input type="date" class="form-control" placeholder="Select Destination" formControlName="returnDate">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 row mt-2">
+                  
+          <div class="row mt-2" >
+            <div class="col-md-6">
+              <label for="">Adults <i> (18+) </i>:</label>
+            </div>
+            <div class="col-md-6">
+              <label for="">Children <i> (0-17) </i>:</label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input type="number" class="form-control" placeholder="Adult(s)" formControlName="adult">
+            <input type="number" class="form-control" placeholder="Children" formControlName="child">
+          </div>
+        </div>
+        <div class="col-md-6 mt-2">
+                 
+          <div class="input-group mt-3">
+            <div class="col-md-12 mx-3">
+              <label for="">Travel Class:</label>
+              <select name="" id="" class="form-control" formControlName="travelClass">
+                <option value="">Choose Travel Class</option>
+                <option *ngFor="let travelClass of travelclasses" [value]="travelClass">{{ travelClass}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-primary btn-md form-control mt-5" > Search Flight</button>
         </div>
 
-    </div> 
+        
+      </form>   
+      
+    </div>
+  </div> 
 </section>

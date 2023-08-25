@@ -54,50 +54,67 @@
      <!-- Your additional div that is not part of the slide -->
      <div class="col-md-12" style=" position: absolute; bottom: 0; left: 0; padding: 20px; height: 600px;">
       <div class="container" style=" margin-top: 150px; padding: 30px; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px;">
-        <div class="row">
-          <div class="col-md-5">
-            <b class="text-success">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-                <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z"/>
-              </svg>
-              Flight:
-            </b>
-            <div class="input-group mt-4">
-              <!-- <span class="input-group-text">First and last name</span> -->
-              <!-- <input type="text" aria-label="First name" class="form-control" placeholder="Select origin">
-              <input type="text" aria-label="Last name" class="form-control" placeholder="Select Destination"> -->
-              <select name="" id="" class="form-control">
-                <option value="">Flying From:</option>
-              </select>
-              <select name="" id="" class="form-control">
-                <option value="">Flying To:</option>
-              </select>
+        
+        <form class="row" [formGroup]="flightSearchForm" (ngSubmit)="onSubmit()">
+          <div class="col-md-5 row">
+            <div class="col-md-6 my-2">
+              <span class="text-success">
+                <i class="bi bi-airplane"></i>
+                Flight:
+              </span>
             </div>
-          </div>
-          <div class="col-md-5">
-            <div class="input-group mb-2">
-              <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">OneWay</a></li>
-                <li><a class="dropdown-item" href="#">Roundtrip</a></li>
-               
-              </ul>
-              <input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
+            <div class="col-md-6 my-2">
+              <div class="dropdown" >
+                <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ flightSearchForm?.get('flightType')?.value }}
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="javascript:void(0);" (click)="setFlightType('One-way')">One-way</a></li>
+                  <li><a class="dropdown-item" href="javascript:void(0);" (click)="setFlightType('Round-trip')">Round-trip</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="row mt-2" >
+              <div class="col-md-6">
+                <label for="">From:</label>
+              </div>
+              <div class="col-md-6">
+                <label for="">To:</label>
+              </div>
             </div>
             <div class="input-group">
-              <input type="date" aria-label="First name" class="form-control" placeholder="Select origin">
-              <input type="date" aria-label="Last name" class="form-control" placeholder="Select Destination">
+              <select name="from" id="from" class="form-control" formControlName="from">
+                <option value="">Flying From:</option>
+                <option *ngFor="let destination of destinations" [value]="destination.cityID">{{ destination.city_code }}</option>
+              </select>
+              <select name="to" id="to" class="form-control" formControlName="to">
+                <option value="">Flying To:</option>
+                <option *ngFor="let destination of destinations" [value]="destination.cityID">{{ destination.city_code }}</option>
+              </select>
             </div>
-    
           </div>
-          <div class="col-md-2">
-            <button class="btn btn-primary btn-md form-control mt-5" > Search Flight</button>
+          <div class="col-md-5 mt-5">
+                 
+            <div class="input-group mt-3">
+              <div class="col-md-5 mx-3">
+                <label for="">Departure:</label>
+                <input type="date" class="form-control" placeholder="Select origin" formControlName="departureDate">
+              </div>
+              <div class="col-md-5 mx-3">
+                <label for="">Return:</label>
+                <input type="date" class="form-control" placeholder="Select Destination"  [disabled]="shouldDisableReturnDate()" formControlName="returnDate">
+              </div>
+            </div>
           </div>
-        </div>
+          <div class="col-md-2 " style="margin-top: 90px;">
+            <button type="submit" class="btn btn-primary btn-md form-control " > Search Flight</button>
+          </div>
+        </form>
         
       </div>
+
+
+      
     
     </div>
   
