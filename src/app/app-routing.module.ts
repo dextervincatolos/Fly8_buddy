@@ -12,7 +12,6 @@ import { PassengerDetailsComponent } from './passenger-details/passenger-details
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { PassengerInfoComponent } from './passenger-info/passenger-info.component';
-
 const routes: Routes = [
   {path:'Home', component: HomeComponent},
   {path:'Search_flight', component: PassengerFormComponent},

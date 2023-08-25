@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FindFlightService } from '../find-flight.service';
 
 import { destination, travelClass } from '../data';
 
@@ -15,9 +16,13 @@ export class PassengerFormComponent implements OnInit{
 
   destinations = destination;
 
+  formData: any;
+
   displayedFlightForm!: FormGroup;
 
-  constructor( private route: ActivatedRoute, private formBuilder: FormBuilder, private router: Router ) { 
+ 
+
+  constructor( private route: ActivatedRoute, private formBuilder: FormBuilder, private router: Router, private findFlightService:FindFlightService, private fb: FormBuilder ) { 
 
     }
 
@@ -35,9 +40,31 @@ export class PassengerFormComponent implements OnInit{
         flyingFrom: params['from'] || '',
         flyingTo: params['to'] || '',
         departureDate: params['departureDate'] || '',
-        returnDate:params['returnDate'] || ''
+        returnDate:params['returnDate'] || '',
+        adult: params['adult'] || '',
+        child: params['child'] || '',
+        travelClass: params['travelClass'] || ''
+      });
+      
+
+      this.formData = history.state.formData || {};
+
+      this.displayedFlightForm.patchValue({
+        // Define your form controls here based on your form structure
+        flightType:this.formData.flightType || 'One-way',
+        flyingFrom: this.formData.flyingFrom || '',
+        flyingTo: this.formData.flyingTo || '',
+        departureDate: this.formData.departureDate || '',
+        returnDate: this.formData.returnDate || '',
+        adult: this.formData.adult || '',
+        child: this.formData.child || '',
+        travelClass: this.formData.travelClass || '',
+  
+        // Add other form controls
       });
     });
+
+
   }
 
   initForm() {
@@ -75,16 +102,21 @@ export class PassengerFormComponent implements OnInit{
     }
   }
   
-
   onFormSubmit() {
+
     if (this.displayedFlightForm.valid) {
-      const formValues = this.displayedFlightForm.value;
+
+      const formData = this.displayedFlightForm.value;
+      this.findFlightService.setFormData(formData);
+
+      this.router.navigate(['/Flight_available']);
+
     } else {
-      console.log('Form is invalid');
-      
-      // You might also want to mark controls as touched to show validation errors
       this.displayedFlightForm.markAllAsTouched();
+
     }
+    
+   
   }
 
 }

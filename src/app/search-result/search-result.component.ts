@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+// import { FindFlightService } from '../find-flight.service';
 
 @Component({
   selector: 'app-search-result',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class SearchResultComponent {
 
+  // constructor(private findFlightService:FindFlightService){}
+
+  // formData: any;
+
+  // ngOnInit(){
+  //   const formData = this.findFlightService.getFormData();
+  //   console.log(formData);
+  // // Now you can use formData in this component without exposing it in the URL
+  // }
 }

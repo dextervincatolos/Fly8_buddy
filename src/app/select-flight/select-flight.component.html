@@ -1,53 +1,104 @@
 <section class="container">
     <div class="col-md-12 row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <h6 class="text-secondary">Departing flight:</h6>
-            <p><b>Melbourne </b>MEL <b>to Bangkok </b>BKK <br> <span>23 Aug2023</span></p>
+            <p><b>{{ flyingFromCity.city_name }} </b>{{ flyingFromCity.city_code }} <b>to {{ flyingToCity.city_name }} </b>{{ flyingToCity.city_code }} <br> <span>{{ formData.departureDate }}</span></p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3"  *ngIf="formData.flightType == 'Round-trip';">
+            <h6 class="text-secondary">Return flight:</h6>
+            <p> <b>{{ flyingToCity.city_name }} </b>{{ flyingToCity.city_code }} <b> to {{ flyingFromCity.city_name }} </b>{{ flyingFromCity.city_code }} <br> <span>{{ formData.returnDate }}</span></p>
+        </div>
+        <div class="col-md-3">
             <h6 class="text-secondary">Guest:</h6>
-            <p>1 adult, 1 child</p>
+            <p>{{ formData.adult }} adult(s), {{ formData.child }} children</p>
         </div>
-        <div class="col-md-4 pt-3">
-            <button type="button" class="btn btn-outline-primary">Edit Search</button>
+        <div class="col-md-3 pt-3">
+            <button type="button" class="btn btn-outline-primary" (click)="editFlight()">Edit Search</button>
         </div>
     </div>
 </section>
 <div class="alert alert-primary" role="alert"></div>
 <section class="container my-3">
     
-    <h4><b>Melbourne</b> MEL - <b>Bangkok</b> BKK</h4>
+    <h4><b>{{ flyingFromCity.city_name }}</b> {{ flyingFromCity.city_code }} - <b>{{ flyingToCity.city_name }}</b> {{ flyingToCity.city_code }}</h4>
 
-    <!-- <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5 my-3"  >
-        
-       <h1><i class="bi bi-airplane"></i></h1>
-        <h5 class=" text-danger">No flights available</h5>
-        <p class="col-lg-6 mx-auto mb-4">
-          Flights for this day are sold out or unavailable. Please check onother date or try editing your search details.
-        </p>
-    </div> -->
-   
-        <span>Available Flights:</span>
-        <div  *ngFor="let airline of airlines">
-          
+    <h6 class="text-success">Departing Flights:</h6>
+    <div *ngIf="departureFlight.length > 0; else noDepartingFlight">
+        <div   *ngFor="let departure of departureFlight">
             <div class="position-relative p-4 text-muted bg-body border border-dashed my-3" style="display: flex;"  >
                 <!-- <p> <i class="bi bi-airplane-fill text-danger"></i> <b class="text-danger mx-5">{{ airline.IATA_code }}</b> |   <b class="text-danger mx-5">{{ airline.flight_date }}</b> |<b class="text-danger mx-5">${{ airline.base_price }}</b> <a href="#"  style="float: right;">Book ticket</a></p> -->
                 <div class="col-md-2 row">
-                    <div class="col-md-2"><i class="bi bi-airplane-fill text-danger"></i></div>
+                    <div class="col-md-2"><i class="bi bi-airplane-fill text-success"></i></div>
                     <div class="col-md-10 text-center">
-                        <b class="text-danger">{{ airline.IATA_code }}</b>
-                        <br><small></small>{{ airline.name }}
+                        <b class="text-success">{{ departure.IATA_code }}</b>
+                        <br><small class="text-success">{{ departure.name }}</small>
                     </div>
                 </div>|
                 <div class="col-md-2  text-center">
-                    <b class="text-danger">{{ airline.flight_date }}</b> 
+                    <b class="text-success">{{ departure.flight_date }}</b> 
                 </div>|
                 <div class="col-md-2 text-center">
-                    <b class="text-danger">${{ airline.base_price }}</b>
+                    <b class="text-success">${{ departure.base_price }}</b>
                 </div>
                 <div class="col-md-6">
                     <a href="#"  style="float: right;">Book ticket</a>
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <ng-template #noDepartingFlight>
+        <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5 my-3"  >
+            
+            <h1><i class="bi bi-airplane"></i></h1>
+            <h5 class=" text-danger">No flights available</h5>
+            <p class="col-lg-6 mx-auto mb-4">
+            Flights for this day are sold out or unavailable. Please check onother date or try editing your search details.
+            </p>
+        </div>
+    </ng-template>
+    
+    <!-- -------------------------------------------------- -->
+    <div *ngIf="formData.flightType == 'Round-trip';">
+        <br>
+        <hr>
+        <br>
+        <h4><b>{{ flyingToCity.city_name }}</b> {{ flyingToCity.city_code }} - <b>{{ flyingFromCity.city_name }}</b> {{ flyingFromCity.city_code }} </h4>
+
+        <h6 class="text-success">returning Flights:</h6>
+        <div *ngIf="returningFlight.length > 0; else noReturningflight">
+            <div   *ngFor="let returning of returningFlight">
+                <div class="position-relative p-4 text-muted bg-body border border-dashed my-3" style="display: flex;"  >
+                    <!-- <p> <i class="bi bi-airplane-fill text-danger"></i> <b class="text-danger mx-5">{{ airline.IATA_code }}</b> |   <b class="text-danger mx-5">{{ airline.flight_date }}</b> |<b class="text-danger mx-5">${{ airline.base_price }}</b> <a href="#"  style="float: right;">Book ticket</a></p> -->
+                    <div class="col-md-2 row">
+                        <div class="col-md-2"><i class="bi bi-airplane-fill text-success"></i></div>
+                        <div class="col-md-10 text-center">
+                            <b class="text-success">{{ returning.IATA_code }}</b>
+                            <br><small class="text-success">{{ returning.name }}</small>
+                        </div>
+                    </div>|
+                    <div class="col-md-2  text-center">
+                        <b class="text-success">{{ returning.flight_date }}</b> 
+                    </div>|
+                    <div class="col-md-2 text-center">
+                        <b class="text-success">${{ returning.base_price }}</b>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="#"  style="float: right;">Book ticket</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <ng-template #noReturningflight>
+            <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5 my-3"  >
+                
+                <h1><i class="bi bi-airplane"></i></h1>
+                <h5 class=" text-danger">No flights available</h5>
+                <p class="col-lg-6 mx-auto mb-4">
+                Flights for this day are sold out or unavailable. Please check onother date or try editing your search details.
+                </p>
+            </div>
+        </ng-template>
     </div>
 </section>
