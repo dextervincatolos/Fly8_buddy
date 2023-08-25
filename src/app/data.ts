@@ -7,3 +7,17 @@ export const airlineIdentification = [
     {airlineID:"6",IATA_code:"TK",name:"Turkish Airlines",base_price:"250.00",economy:"8.80",premium_economy:"18.90",business:"38.70",first_class:"58.90",flight_date:"2023-09-08"},
     {airlineID:"7",IATA_code:"U2",name:"Easyjet",base_price:"100.99",economy:"10.89",premium_economy:"23.99",business:"34.88",first_class:"55.90",flight_date:"2023-09-08"}
 ];
+
+export const destination =[
+    {cityID:"1",city_code:"MAD",city_name:"Madrid"},
+    {cityID:"2",city_code:"BCN",city_name:"Barcelona"},
+    {cityID:"3",city_code:"LHR",city_name:"London"},
+    {cityID:"4",city_code:"CDG",city_name:"Paris"},
+    {cityID:"5",city_code:"FRA",city_name:"Frakfurt"},
+    {cityID:"6",city_code:"IST",city_name:"Istanbul"},
+    {cityID:"7",city_code:"AMS",city_name:"Amsterdam"},
+    {cityID:"8",city_code:"FCO",city_name:"Rome"},
+    {cityID:"9",city_code:"CPH",city_name:"Copenhagen"}
+];
+
+export const travelClass =['Economy', 'Premium Economy', 'Business', 'First Class'];
