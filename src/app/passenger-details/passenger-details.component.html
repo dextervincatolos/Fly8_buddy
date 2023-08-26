@@ -14,98 +14,78 @@
                 <span class="text-primary">Flight Information</span>
                 <i class="bi bi-info-square text-primary"></i>
                 </h4>
-                <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                    <div>
-                    <h6 class="my-0"><b>MNL</b> to <b>MEL</b>(<small class="text-secondary">2023-23-08</small>)</h6>
-                    <small class="text-body-secondary">- Go Easy</small>
+                <ul class="list-group mb-3" *ngFor="let reservation of reservations">
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                        <h6 class="my-0"><b>{{ reservation.cityCodeFrom }}</b> to <b>{{ reservation.cityCodeTo }}</b>(<small class="text-secondary"> {{ reservation.departureDate }}</small>)</h6>
+                        <small class="text-body-secondary"> - {{ reservation.travelClass }}</small>
+                        </div>
+                        <span class="text-body-secondary"><b class="text-success">${{ reservation.basePrice }}</b> <br> <small class="text-success">+ ${{ reservation.travelClassprice }}</small></span>
+                    </li>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6"><h5> <b class="text-secondary">AMOUNT TO PAY:</b></h5></div>
+                        <div class="col-md-6"><h5 style="text-align: right;"> <b class="text-danger" >${{ (reservation.basePrice + reservation.travelClassprice) | number:'1.2-2' }}</b></h5></div>
                     </div>
-                    <span class="text-body-secondary"><b class="text-danger">$39.00</b></span>
-                </li>
-                <hr>
+                    <br>
+                    <hr>
                 </ul>
 
             </div>
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">Personal Information</h4>
                 
-                <form class="needs-validation" novalidate="">
+                <form  >
                     <h5 class="m-2">Adult:</h5>
-                <div class="row g-3">
-                    <div class="col-sm-6">
-                    <label for="firstName" class="form-label">First name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                    <div class="invalid-feedback">
-                        Valid first name is required.
-                    </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                    <label for="lastName" class="form-label">Last name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                    <div class="invalid-feedback">
-                        Valid last name is required.
-                    </div>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="address" class="form-label">Birthday</label>
-                        <input type="date" class="form-control" id="address" placeholder="1234 Main St" required="">
-                        <div class="invalid-feedback">
-                        Please enter your shipping address.
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName" >
                         </div>
-                    </div>
 
-                    <div class="col-12">
-                    <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                    <div class="invalid-feedback">
-                        Please enter a valid email address for shipping updates.
-                    </div>
-                    </div>
-
-                </div>
-                <hr>
-                <h5 class="m-2">Child:</h5>
-                <div class="row g-3">
-                    <div class="col-sm-6">
-                    <label for="firstName" class="form-label">First name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                    <div class="invalid-feedback">
-                        Valid first name is required.
-                    </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                    <label for="lastName" class="form-label">Last name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                    <div class="invalid-feedback">
-                        Valid last name is required.
-                    </div>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="address" class="form-label">Birthday</label>
-                        <input type="date" class="form-control" id="address" placeholder="1234 Main St" required="">
-                        <div class="invalid-feedback">
-                        Please enter your shipping address.
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="lastName">
                         </div>
+
+                        <div class="col-12">
+                            <label for="birthday" class="form-label">Birthday</label>
+                            <input type="date" class="form-control" id="birthday">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                        </div>
+
                     </div>
+                    <hr>
+                    <h5 class="m-2">Child:</h5>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName">
+                        </div>
 
-                    <div class="col-12">
-                    <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                    <div class="invalid-feedback">
-                        Please enter a valid email address for shipping updates.
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="lastName">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="birtday" class="form-label">Birthday</label>
+                            <input type="date" class="form-control" id="birtday">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                        </div>
+
                     </div>
-                    </div>
+                    <hr class="my-4">
 
-                </div>
-
-
-                <hr class="my-4">
-
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
                 </form>
             </div>
             </div>

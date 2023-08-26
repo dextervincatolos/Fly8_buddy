@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { FindFlightService } from '../find-flight.service';
+import { PassengerInfoService } from '../passenger-info.service';
+import { ReservationService } from '../reservation.service'; 
+
 
 import { airlineIdentification } from '../data';
 import { destination } from '../data';
@@ -11,16 +15,18 @@ import { destination } from '../data';
   styleUrls: ['./select-flight.component.css']
 })
 export class SelectFlightComponent {
+
   airlines = airlineIdentification;
 
   formData: any;
   flyingFromCity: any; // To store the flyingFrom city details
   flyingToCity: any;
   departureFlight: any[] = []; // To store the filtered flights
+
   returningFlight: any[] = []; // To store the filtered flights
 
 
-  constructor(private findFlightService:FindFlightService,private router: Router){}
+  constructor(private findFlightService:FindFlightService, private router: Router, private passengerInfoService: PassengerInfoService, private reservationService: ReservationService){}
 
  
   
@@ -54,5 +60,13 @@ export class SelectFlightComponent {
     { state: { formData: this.formData} }); 
   }
 
+  bookTicket(formData: any, flightData: any) {
+    //console.log(flightData);
+   this.reservationService.addReservation(formData, flightData);
+    // Other actions you want to perform after adding the reservation
+     //this.passengerInfoService.passengerInfo = departureFlightData;
+     this.router.navigate(['Passenger_info']);
+    
+  }
 
 }

@@ -41,7 +41,7 @@
                     <b class="text-success">${{ departure.base_price }}</b>
                 </div>
                 <div class="col-md-6">
-                    <a href="#"  style="float: right;">Book ticket</a>
+                    <a style="float: right;" href="javascript:void(0);" (click)="bookTicket(formData,departure)">Book ticket</a>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                         <b class="text-success">${{ returning.base_price }}</b>
                     </div>
                     <div class="col-md-6">
-                        <a href="#"  style="float: right;">Book ticket</a>
+                        <a style="float: right;" href="javascript:void(0);" (click)="bookTicket(formData,returning.airlineID)">Book ticket</a>
                     </div>
                 </div>
             </div>
