@@ -23,9 +23,12 @@
                         <span class="text-body-secondary"><b class="text-success">${{ reservation.basePrice }}</b> <br> <small class="text-success">+ ${{ reservation.travelClassprice }}</small></span>
                     </li>
                     <br>
+                    <div style="text-align: right;"> <h1 class="text-secondary"><i class="bi bi-x"></i> {{ passenger }}</h1></div>
+                   
+                    <br>
                     <div class="row">
                         <div class="col-md-6"><h5> <b class="text-secondary">AMOUNT TO PAY:</b></h5></div>
-                        <div class="col-md-6"><h5 style="text-align: right;"> <b class="text-danger" >${{ (reservation.basePrice + reservation.travelClassprice) | number:'1.2-2' }}</b></h5></div>
+                        <div class="col-md-6"><h5 style="text-align: right;"> <b class="text-danger" >${{ (reservation.basePrice + reservation.travelClassprice) * passenger| number:'1.2-2' }}</b></h5></div>
                     </div>
                     <br>
                     <hr>
@@ -35,58 +38,14 @@
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">Personal Information</h4>
                 
-                <form  >
-                    <h5 class="m-2">Adult:</h5>
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label for="firstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName" >
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label for="lastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="lastName">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="birthday" class="form-label">Birthday</label>
-                            <input type="date" class="form-control" id="birthday">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                        </div>
-
+                <form [formGroup]="passengerForm" (ngSubmit)="onSubmit()" class="mb-5">
+                    <div formArrayName="names">
+                      <div *ngFor="let nameControl of nameInputs.controls; let i = index">
+                        <input type="text" class="form-control my-2" [formControlName]="i" [placeholder]="'Passenger Name ' + (i + 1)">
+                      </div>
                     </div>
-                    <hr>
-                    <h5 class="m-2">Child:</h5>
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label for="firstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName">
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label for="lastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="lastName">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="birtday" class="form-label">Birthday</label>
-                            <input type="date" class="form-control" id="birtday">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                        </div>
-
-                    </div>
-                    <hr class="my-4">
-
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
-                </form>
+                    <button type="submit" class="btn btn-primary form-control">Submit</button>
+                  </form>
             </div>
             </div>
         </div>
