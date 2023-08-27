@@ -12,11 +12,14 @@ import { PassengerDetailsComponent } from './passenger-details/passenger-details
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { PassengerInfoComponent } from './passenger-info/passenger-info.component';
+import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 const routes: Routes = [
+  {path:'', component: HomeComponent},
   {path:'Home', component: HomeComponent},
   {path:'Search_flight', component: PassengerFormComponent},
   {path:'Flight_available', component: SearchResultComponent},
   {path:'Passenger_info', component: PassengerInfoComponent},
+  {path:'View_ticket', component: ViewTicketComponent},
 ];
 
 @NgModule({
