@@ -14,6 +14,7 @@ import { PassengerDetailsComponent } from './passenger-details/passenger-details
 import { HomeComponent } from './home/home.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { PassengerInfoComponent } from './passenger-info/passenger-info.component';
+import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PassengerInfoComponent } from './passenger-info/passenger-info.componen
     HomeComponent,
     SearchResultComponent,
     PassengerInfoComponent,
+    ViewTicketComponent,
   ],
   imports: [
     BrowserModule,
