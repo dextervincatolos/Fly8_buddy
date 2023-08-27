@@ -47,12 +47,12 @@
           <div class="input-group mt-3">
             <div class="col-md-5 mx-3">
               <label for="">Departure:</label>
-              <input type="date" class="form-control" placeholder="Select origin" formControlName="departureDate">
+              <input type="date" class="form-control" placeholder="Select origin" formControlName="departureDate" [min]="getCurrentDate()">
             </div>
             
             <div class="col-md-5 mx-3">
               <label for="">Return:</label>
-              <input type="date" class="form-control" placeholder="Select Destination" formControlName="returnDate">
+              <input type="date" class="form-control" placeholder="Select Destination" formControlName="returnDate" [min]="getCurrentDate()">
             </div>
           </div>
         </div>
@@ -67,8 +67,8 @@
             </div>
           </div>
           <div class="input-group">
-            <input type="number" class="form-control" placeholder="Adult(s)" formControlName="adult">
-            <input type="number" class="form-control" placeholder="Children" formControlName="child">
+            <input type="number" class="form-control" placeholder="Adult(s)" formControlName="adult" [min]="1">
+            <input type="number" class="form-control" placeholder="Children" formControlName="child" [min]="0">
           </div>
         </div>
         <div class="col-md-6 mt-2">

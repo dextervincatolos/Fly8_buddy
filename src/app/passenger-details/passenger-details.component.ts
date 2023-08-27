@@ -1,8 +1,10 @@
 import { Component , OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PassengerInfoService } from '../passenger-info.service';
 import { ReservationService } from '../reservation.service';
 import { destination } from '../data';
+import { NameService } from '../name.service';
 
 @Component({
   selector: 'app-passenger-details',
@@ -19,13 +21,13 @@ export class PassengerDetailsComponent{
   adultCount: number = 0; // Variable to store adult count
   childrenCount: number = 0; // Variable to store children count
 
-  constructor(private fb: FormBuilder, private passengerInfoService: PassengerInfoService, private reservationService: ReservationService){
-    
+  constructor(private fb: FormBuilder, private passengerInfoService: PassengerInfoService, private nameService: NameService,private reservationService: ReservationService, private formBuilder: FormBuilder,private router: Router){
+    this.passengerForm = this.formBuilder.group({
+      names: this.formBuilder.array([this.formBuilder.control('', [Validators.required])])
+    });
   }
 
   ngOnInit() {
-
-   
 
     this.reservations = this.reservationService.reservation;
 
@@ -79,9 +81,25 @@ export class PassengerDetailsComponent{
 
 
   onSubmit() {
-    // Handle form submission
-    console.log(this.passengerForm.value.names);
-  }
+
+    const passengerFormData = this.passengerForm.value;
+    this.nameService.setFormData(passengerFormData);
+
+  //   if (this.passengerForm.valid) {
+
+  //     const formData = this.passengerForm.value;
+  //    // this.passengerForm.setFormData(formData);
+  //     console.log(this.passengerForm.value.names);
+
+       this.router.navigate(['/View_ticket']);
+
+  //   } else {
+  //     this.passengerForm.markAllAsTouched();
+
+  //   }
+  //   // Handle form submission
+  //   //console.log(this.passengerForm.value.names);
+   }
 
 }
 
