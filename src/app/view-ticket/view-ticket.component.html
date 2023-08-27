@@ -1,0 +1,51 @@
+
+
+<section class="container my-5" id="content" *ngFor="let reservation of reservations">
+<span class="text-center"><h2>Plane ticket Purchase</h2></span>
+<hr>
+
+<p>PNR Number:<b class="mx-5">{{ reservation.reservationID }}{{ reservation.IATA_code }} </b></p>
+<p>Booking date:<b class="mx-5">{{ getCurrentDate() }}</b></p>
+<p>Passengers:<b class="mx-5" > {{ nameData.names}}</b></p>
+<hr>
+<h3>Flight Details:</h3>
+<p>Route:</p>
+<table class="col-md-12 table">
+    <thead>
+        <tr>
+            <th>Flying From</th>
+            <th>Flying To</th>
+            <th>airline</th>
+            <th>Departure Date</th>
+            <th>Travel Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr >
+            <td> {{ reservation.cityCodeFrom }}</td>
+            <td> {{ reservation.cityCodeTo }}</td>
+            <td> {{ reservation.airlineName }}</td>
+            <td>{{ reservation.departureDate }} </td>
+            <td>{{ reservation.travelClass }} </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<hr>
+<h3>Fare Breakdown:</h3>
+
+<p>Base Fare: <b class="mx-5">${{ reservation.basePrice }}</b></p>
+<p>Travel Class (Add-on):<b class="mx-5">${{ reservation.travelClassprice }}</b></p>
+<p>Passenger:<b class="mx-5">{{ reservation.adult + reservation.children }} persons</b></p>
+<br>
+<hr>
+<h3>Total Amount: <b class="mx-5 text-danger">${{ (reservation.basePrice + reservation.travelClassprice) * (reservation.adult + reservation.children)| number:'1.2-2' }}</b></h3>
+<br>
+<span class="text-center mt-5"><h4>THANK YOU FOR MAKING YOUR AIRLINE OF CHOICE! HAVE A SAFE FLIGHT</h4><br> <h6>
+    <i class="bi bi-rocket-takeoff"></i>
+    Fly8 Buddy
+  </h6></span>
+  <button class="btn btn-primary  my-5" (click)="convertToPDF()">Download ticket</button>
+</section>
+
+
